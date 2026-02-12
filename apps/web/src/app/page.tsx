@@ -1,6 +1,4 @@
 "use client";
-
-import { useState } from "react";
 import {
   Sparkles,
   Zap,
@@ -10,7 +8,9 @@ import {
   Cpu,
   Cloud,
   Lock,
+  Settings,
 } from "lucide-react";
+import Link from "next/link";
 
 const providers = [
   { name: "OpenAI", color: "from-green-500 to-emerald-600", delay: "0ms" },
@@ -43,8 +43,6 @@ const features = [
 ];
 
 export default function Home() {
-  const [hoveredProvider, setHoveredProvider] = useState<string | null>(null);
-
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white overflow-hidden">
       {/* Background effects */}
@@ -73,12 +71,25 @@ export default function Home() {
             <span className="font-bold text-lg">openMaaS</span>
           </div>
           <nav className="flex items-center gap-6 text-sm text-slate-400">
+            <Link
+              href="/chat"
+              className="hover:text-white transition-colors"
+            >
+              Chat
+            </Link>
             <a href="#features" className="hover:text-white transition-colors">
               Features
             </a>
             <a href="#providers" className="hover:text-white transition-colors">
               Providers
             </a>
+            <Link
+              href="/settings"
+              className="flex items-center gap-1 hover:text-white transition-colors"
+            >
+              <Settings className="w-4 h-4" />
+              Settings
+            </Link>
           </nav>
         </header>
 
@@ -116,12 +127,15 @@ export default function Home() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <button className="group px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl font-semibold text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all hover:scale-105">
+              <Link
+                href="/chat"
+                className="group px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl font-semibold text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all hover:scale-105"
+              >
                 <span className="flex items-center justify-center gap-2">
                   시작하기
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
-              </button>
+              </Link>
               <button className="px-8 py-4 bg-white/5 border border-white/10 rounded-xl font-semibold hover:bg-white/10 transition-all">
                 문서 보기
               </button>
@@ -145,8 +159,6 @@ export default function Home() {
               <div
                 key={provider.name}
                 className="group relative"
-                onMouseEnter={() => setHoveredProvider(provider.name)}
-                onMouseLeave={() => setHoveredProvider(null)}
                 style={{ animationDelay: provider.delay }}
               >
                 <div
