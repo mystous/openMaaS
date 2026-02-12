@@ -1,0 +1,24 @@
+{
+  "name": "openmaas",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Open Model-as-a-Service - Multi-provider LLM Playground",
+  "scripts": {
+    "dev": "pnpm --parallel -r run dev",
+    "dev:web": "pnpm --filter @openmaas/web dev",
+    "dev:proxy": "pnpm --filter @openmaas/proxy dev",
+    "build": "pnpm -r run build",
+    "lint": "pnpm -r run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
+    "clean": "pnpm -r run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

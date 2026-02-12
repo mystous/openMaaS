@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_PROXY_URL=http://localhost:8000
+    depends_on:
+      - proxy
+    volumes:
+      - ./apps/web/src:/app/src:ro
+    networks:
+      - openmaas
+
+  proxy:
+    build:
+      context: ./apps/proxy
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - LOG_LEVEL=info
+      # API 키 관련 환경변수 없음 (Zero-Knowledge)
+    networks:
+      - openmaas
+
+networks:
+  openmaas:
+    driver: bridge
